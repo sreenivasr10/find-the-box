@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the Box Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .game-container {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 2px solid #333;
+            background-color: #fff;
+        }
+
+        #box {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="box"></div>
+        <div id="score">Score: 0</div>
+    </div>
+    <script>
+        let score = 0;
+        const box = document.getElementById('box');
+        const scoreDisplay = document.getElementById('score');
+        const gameContainer = document.querySelector('.game-container');
+
+        function randomPosition() {
+            const containerWidth = gameContainer.offsetWidth;
+            const containerHeight = gameContainer.offsetHeight;
+
+            const x = Math.random() * (containerWidth - box.offsetWidth);
+            const y = Math.random() * (containerHeight - box.offsetHeight);
+
+            box.style.left = `${x}px`;
+            box.style.top = `${y}px`;
+        }
+
+        box.addEventListener('click', () => {
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+            randomPosition();
+        });
+
+        // Start the game by placing the box in a random position
+        randomPosition();
+    </script>
+</body>
+</html>
